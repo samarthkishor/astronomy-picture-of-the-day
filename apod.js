@@ -6,7 +6,7 @@ const fs = require('fs');
 // format the current date
 const today = new Date();
 const day = today.getDate();
-const month = today.getMonth();
+const month = today.getMonth() + 1;
 const year = today.getFullYear();
 const date = `${month}-${day}-${year}`;
 
@@ -19,7 +19,7 @@ nightmare
     return document.querySelector('body > p').textContent.trim();
 })
 .then(function (result) {
-    fs.appendFile('explanations.txt', date + ', ' + result + '\n\n');
+    fs.appendFile('explanations.txt', date + ', ' + result + '\n\n' + '-----');
     return nightmare
         .click('body > center:nth-child(1) > p:nth-child(3) > a > img')
         .wait(5000)
