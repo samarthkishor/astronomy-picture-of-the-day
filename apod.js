@@ -19,7 +19,7 @@ nightmare
     return document.querySelector('body > p').textContent.trim();
 })
 .then(function (result) {
-    fs.appendFile('explanations.txt', date + ', ' + result + '\n\n' + '-----');
+    fs.appendFile('explanations.json', JSON.stringify({ date: date, explanation: result.replace(/\n|Explanation:/g, ' ') }), null, 4);
     return nightmare
         .click('body > center:nth-child(1) > p:nth-child(3) > a > img')
         .wait(5000)
@@ -31,3 +31,4 @@ nightmare
 .catch(function (error) {
     console.error(error);
 });
+
