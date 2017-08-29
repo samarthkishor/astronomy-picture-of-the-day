@@ -15,20 +15,28 @@ const date = `${month}-${day}-${year}`;
 nightmare
 .goto('https://apod.nasa.gov/apod/')
 .wait('body > p')
-.evaluate(function () {
+.evaluate(() => {
     return document.querySelector('body > p').textContent.trim();
 })
-.then(function (result) {
-    fs.appendFile('explanations.json', JSON.stringify({ date: date, explanation: result.replace(/\n|Explanation:/g, ' ') }), null, 4);
+.then((result) => {
+    const entry = JSON.stringify({
+        'date': date,
+        'explanation': result.replace(/\n|Explanation:/g, ' ')
+    }, null, 4);
+
+    fs.writeFile('./lib/explanations/todaysExplanation.json', entry, (err) => {
+        if (err) throw err;
+        console.log('The file has been saved');
+    });
+
     return nightmare
         .click('body > center:nth-child(1) > p:nth-child(3) > a > img')
         .wait(5000)
-        .screenshot(`./lib/${date}.jpg`)
-        .then(function () {
+        .screenshot(`./lib/pictures/${date}.jpg`)
+        .then(() => {
             return nightmare.end();
         });
 })
-.catch(function (error) {
+.catch((error) => {
     console.error(error);
 });
-
