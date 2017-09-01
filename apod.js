@@ -19,14 +19,19 @@ nightmare
     return document.querySelector('body > p').textContent.trim();
 })
 .then((result) => {
-    const entry = JSON.stringify({
+    const entry = {
         'date': date,
+        'picture': `./lib/pictures/${date}.jpg`,
         'explanation': result.replace(/\n|Explanation:/g, ' ')
-    }, null, 4);
-
-    fs.writeFile('./lib/explanations/todaysExplanation.json', entry, (err) => {
-        if (err) throw err;
-        console.log('The file has been saved');
+    };
+    fs.readFile('./lib/explanations/explanations.json', (error, data) => {
+        if (error) throw error;
+        let jsonData = JSON.parse(data).elements;
+        jsonData.push(entry);
+        fs.writeFile('./lib/explanations/explanations.json', JSON.stringify(jsonData, null, 4), (error) => {
+            if (error) throw error;
+            console.log('The file has been saved');
+        });
     });
 
     return nightmare
