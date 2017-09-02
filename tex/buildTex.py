@@ -9,7 +9,7 @@ with open(dataPath) as data_file:
 
 def fill_document():
     doc = Document()
-    for object in data:
+    for object in data['elements']:
         date = object['date']
         explanation = object['explanation']
         picturePath = '.' + object['picture']
@@ -46,6 +46,7 @@ def fill_document():
             doc.append(bold('\n\nExplanation:\n'))
             doc.append(explanation)
             doc.append(NewPage())
+
     doc.generate_pdf('astronomy-picture-of-the-day', clean_tex=False)
 
 fill_document()

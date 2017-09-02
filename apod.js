@@ -24,10 +24,11 @@ nightmare
         'picture': `./lib/pictures/${date}.jpg`,
         'explanation': result.replace(/\n|Explanation:/g, ' ')
     };
-    fs.readFile('./lib/explanations/explanations.json', (error, data) => {
+    fs.readFile('./lib/explanations/explanations.json', 'utf8', (error, data) => {
         if (error) throw error;
-        let jsonData = JSON.parse(data).elements;
-        jsonData.push(entry);
+        let jsonData = JSON.parse(data);
+        // let elements = jsonData.elements
+        jsonData.elements.push(entry);
         fs.writeFile('./lib/explanations/explanations.json', JSON.stringify(jsonData, null, 4), (error) => {
             if (error) throw error;
             console.log('The file has been saved');
