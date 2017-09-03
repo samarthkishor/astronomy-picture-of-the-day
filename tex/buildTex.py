@@ -7,42 +7,50 @@ dataPath = '../lib/explanations/explanations.json'
 with open(dataPath) as data_file:
     data = json.load(data_file)
 
+
 def fill_document():
     doc = Document()
-    for object in data['elements']:
-        date = object['date']
-        explanation = object['explanation']
-        picturePath = '.' + object['picture']
+    for element in data['elements']:
+        date = element['date']
+        explanation = element['explanation']
+        picture_path = '.' + element['picture']
 
-        splitDate = date.split('-')
+        split_date = date.split('-')
 
-        if splitDate[0] == '1':
+        month = ''
+
+        if split_date[0] == '01':
             month = 'January'
-        elif splitDate[0] == '2':
+        elif split_date[0] == '02':
             month = 'February'
-        elif splitDate[0] == '3':
+        elif split_date[0] == '03':
             month = 'March'
-        elif splitDate[0] == '4':
+        elif split_date[0] == '04':
             month = 'April'
-        elif splitDate[0] == '5':
+        elif split_date[0] == '05':
             month = 'May'
-        elif splitDate[0] == '6':
+        elif split_date[0] == '06':
             month = 'June'
-        elif splitDate[0] == '7':
+        elif split_date[0] == '07':
             month = 'July'
-        elif splitDate[0] == '8':
+        elif split_date[0] == '08':
             month = 'August'
-        elif splitDate[0] == '9':
+        elif split_date[0] == '09':
             month = 'September'
-        elif splitDate[0] == '10':
+        elif split_date[0] == '10':
             month = 'October'
-        elif splitDate[0] == '11':
+        elif split_date[0] == '11':
             month = 'November'
-        elif splitDate[0] == '12':
+        elif split_date[0] == '12':
             month = 'December'
 
-        with doc.create(Section(month + ' ' + splitDate[1] + ', ' + splitDate[2], numbering=False)):
-            doc.append(StandAloneGraphic(image_options='width=350px', filename=picturePath))
+        if int(split_date[1]) < 10:
+            date = str(split_date[1])[1:]
+        else:
+            date = split_date[1]
+
+        with doc.create(Section(month + ' ' + date + ', ' + split_date[2], numbering=False)):
+            doc.append(StandAloneGraphic(image_options='width=350px', filename=picture_path))
             doc.append(bold('\n\nExplanation:\n'))
             doc.append(explanation)
             doc.append(NewPage())
@@ -50,3 +58,4 @@ def fill_document():
     doc.generate_pdf('astronomy-picture-of-the-day', clean_tex=False)
 
 fill_document()
+print('The pdf has been generated.')
