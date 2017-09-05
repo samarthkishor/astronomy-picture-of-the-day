@@ -1,11 +1,10 @@
 {
   "name": "astronomy-picture-of-the-day",
   "version": "1.0.0",
-  "description": "A web scraper that downloads the Astronomy Picture of the Day",
+  "description": "A program that scrapes NASA's Astronomy Picture of the Day website and automatically creates a pdf with the picture and explanation",
   "main": "apod.js",
   "dependencies": {
-    "nightmare": "^2.10.0",
-    "nightmare-download-manager": "^0.2.4"
+    "nightmare": "^2.10.0"
   },
   "devDependencies": {},
   "scripts": {

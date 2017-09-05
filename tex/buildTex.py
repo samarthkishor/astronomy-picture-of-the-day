@@ -17,8 +17,6 @@ def fill_document():
 
         split_date = date.split('-')
 
-        month = ''
-
         if split_date[0] == '01':
             month = 'January'
         elif split_date[0] == '02':
@@ -43,6 +41,8 @@ def fill_document():
             month = 'November'
         elif split_date[0] == '12':
             month = 'December'
+        else:
+            month = 'Invalid month'
 
         if int(split_date[1]) < 10:
             date = str(split_date[1])[1:]
@@ -50,7 +50,7 @@ def fill_document():
             date = split_date[1]
 
         with doc.create(Section(month + ' ' + date + ', ' + split_date[2], numbering=False)):
-            doc.append(StandAloneGraphic(image_options='width=350px', filename=picture_path))
+            doc.append(StandAloneGraphic(image_options=r'width=\textwidth', filename=picture_path))
             doc.append(bold('\n\nExplanation:\n'))
             doc.append(explanation)
             doc.append(NewPage())
