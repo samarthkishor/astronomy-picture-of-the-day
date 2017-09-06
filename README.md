@@ -7,7 +7,7 @@ A program that scrapes NASA's Astronomy Picture of the Day website and automatic
 
 First clone the repository and run
 
-    npm install nightmare
+    npm install
 
 and
 
