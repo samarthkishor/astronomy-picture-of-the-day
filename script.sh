@@ -12,6 +12,7 @@ else
         cd tex
         python3 buildTex.py
     else
-        echo 'The picture has not been saved yet.'
+        echo 'The picture has not been saved yet or there is some error with the scraper.'
+        exit 1
     fi
 fi

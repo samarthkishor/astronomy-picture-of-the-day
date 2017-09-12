@@ -57,5 +57,6 @@ def fill_document():
 
     doc.generate_pdf('astronomy-picture-of-the-day', clean_tex=False)
 
+
 fill_document()
 print('The pdf has been generated.')

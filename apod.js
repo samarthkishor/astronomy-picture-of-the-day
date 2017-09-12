@@ -19,7 +19,7 @@ if (today.getDate() < 10) {
     day = '0' + intDay.toString();
 }
 else {
-    month = today.getDate();
+    day = today.getDate();
 }
 const year = today.getFullYear();
 const date = `${month}-${day}-${year}`;
@@ -57,12 +57,52 @@ nightmare
     });
 
     return nightmare
-        .click('body > center:nth-child(1) > p:nth-child(3) > a > img')
-        .wait(5000)
-        .screenshot(`./lib/pictures/${date}.jpg`)
-        .then(() => {
-            console.log('The picture has been saved.')
-            return nightmare.end();
+        .evaluate(() => {
+            return document.querySelector('body > center:nth-child(1) > p:nth-child(3) > a > img');
+        })
+        .then((result) => {
+            // check if the page contains an image, else assume it contains an embedded video
+            if (result !== null) {
+                return nightmare
+                .click('body > center:nth-child(1) > p:nth-child(3) > a > img')
+                .wait(5000)
+                .screenshot(`./lib/pictures/${date}.jpg`)
+                .then(() => {
+                    console.log('The picture has been saved.')
+                    return nightmare.end();
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            }
+            else {
+                console.log('The media is an embedded video, not an image.')
+                return nightmare
+                .wait('body > center:nth-child(1) > p:nth-child(3) > iframe')
+                .wait(3000) // wait for the video to render
+                .evaluate(() => {
+                    return document.querySelector('body > center:nth-child(1) > p:nth-child(3) > iframe').getAttribute('src');
+                })
+                .then((result) => {
+                    return nightmare
+                    .goto(result)
+                    .wait(3000) // wait for the video to enter fullscreen mode
+                    .screenshot(`./lib/pictures/${date}.jpg`)
+                    .then(() => {
+                        console.log('The picture has been saved.');
+                        return nightmare.end();
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            }
+        })
+        .catch((error) => {
+            console.error(error);
         });
 })
 .catch((error) => {
