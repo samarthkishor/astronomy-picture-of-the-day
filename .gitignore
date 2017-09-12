@@ -37,6 +37,8 @@ node_modules/
 jspm_packages/
 lib/pictures/
 .idea/
+tex/astronomy-picture-of-the-day.tex
+tex/astronomy-picture-of-the-day.pdf
 
 # Typescript v1 declaration files
 typings/
