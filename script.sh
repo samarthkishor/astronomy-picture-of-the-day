@@ -1,7 +1,7 @@
 #!/bin/bash
 
 today=`date '+%m-%d-%Y'`
-if [  -f ./lib/pictures/${today}.jpg ]
+if [ -f ./lib/pictures/${today}.jpg ]
 then
     echo 'The file already exists.'
 else
