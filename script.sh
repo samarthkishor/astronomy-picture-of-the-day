@@ -1,7 +1,6 @@
 #!/bin/bash
 
 today=`date '+%m-%d-%Y'`
-cd ~/Documents/Programming/Scrapers/astronomy-picture-of-the-day
 if [  -f ./lib/pictures/${today}.jpg ]
 then
     echo 'The file already exists.'
