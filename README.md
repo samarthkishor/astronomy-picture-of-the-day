@@ -1,6 +1,6 @@
 # astronomy-picture-of-the-day
 
-A program that scrapes NASA's Astronomy Picture of the Day website and automatically creates a pdf with the picture and explanation.
+A program that scrapes [NASA's Astronomy Picture of the Day website](https://apod.nasa.gov/apod/) and automatically creates a pdf with the picture and explanation.
 
 ## Installation
 > Note: Make sure you have LaTeX, Node.js, and Python 3 installed before proceeding. The program was created and tested on a computer running macOS but it should also work on Linux. It uses Node for the web scraper and Python for creating and compiling the LaTeX file into a pdf.
