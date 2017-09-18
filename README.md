@@ -9,11 +9,10 @@ First clone the repository and run
 
     bash setup.sh
 
-
 to install the required dependencies and run the program for the first time.
 
 
-## Implementation
+## Let's Try It Out
 
 To run the program the day after `setup.sh` has successfully created the pdf, simply run
 
@@ -24,5 +23,6 @@ and the resulting pdf should be located in `/tex/astronomy-picture-of-the-day.pd
 
 ## Notes
 
-- See the [PyLaTeX](https://jeltef.github.io/PyLaTeX/latest/index.html) and [Nightmare](https://github.com/segmentio/nightmare#api) documentation for additional information.
+- Check out [the sample pdf](https://github.com/samarthkishor/astronomy-picture-of-the-day/blob/master/sample-apod.pdf) (`sample-apod.pdf`) to see what this program can do.
+- See the [PyLaTeX](https://jeltef.github.io/PyLaTeX/latest/index.html) and [Nightmare](https://github.com/segmentio/nightmare#api) documentation for additional information. This program wouldn't exist without these excellent projects.
 - Sometimes the Astronomy Picture of the Day website will have an embedded video instead of a picture. If that is the case, the scraper will take a screenshot of the fullscreen video (usually either YouTube or Vimeo).
